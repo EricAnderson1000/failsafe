@@ -206,7 +206,7 @@ Execution failures are first retried according to the `RetryPolicy`, then if the
 
 #### Failing Together
 
-A circuit breaker can and should be shared across code that accesses inter-dependent system components that which together. This ensures that if the circuit is opened, executions against one component that rely on another component will not be allowed until the circuit is closed again.
+A circuit breaker can and should be shared across code that accesses inter-dependent system components that fail together. This ensures that if the circuit is opened, executions against one component that rely on another component will not be allowed until the circuit is closed again.
 
 #### Standalone Usage
 
@@ -308,8 +308,8 @@ Java 8 users can use Failsafe to retry [CompletableFuture] calls:
 Failsafe.with(retryPolicy)
   .with(executor)
   .future(this::connectAsync)
-    .thenApplyAsync(value -> value + "bar")
-    .thenAccept(System.out::println));
+  .thenApplyAsync(value -> value + "bar")
+  .thenAccept(System.out::println));
 ```
 
 #### Functional Interface Integration
